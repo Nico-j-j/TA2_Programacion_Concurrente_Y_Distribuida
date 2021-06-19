@@ -19,23 +19,33 @@ import (
 var entidades []Entidad
 
 type Entidad struct {
-	RUC           int    `json:"ruc"`
-	NombreEntidad string `json:"nombreentidad"`
-	Departamento  string `json:"departamento"`
-	Provincia     string `json:"provincia"`
-	Distrito      string `json:"distrito"`
+	RUC                 int    `json:"ruc"`
+	NombreEntidad       string `json:"nombreentidad"`
+	Departamento        string `json:"departamento"`
+	Provincia           string `json:"provincia"`
+	Distrito            string `json:"distrito"`
+	CodigoSIAF          int    `json:"codigo_siaf"`
+	CodConSuCode        int    `json:"codconsucode"`
+	Estado              string `json:"estado"`
+	UltimaActualizacion string `json:"ultima_actualizacion"`
 }
 
 func lineStruct(datas [][]string) {
 	for _, line := range datas {
 		RUC, _ := strconv.Atoi(strings.TrimSpace(line[0]))
+		CodigoSIAF, _ := strconv.Atoi(strings.TrimSpace(line[5]))
+		CodConSuCode, _ := strconv.Atoi(strings.TrimSpace(line[6]))
 
 		entidades = append(entidades, Entidad{
-			RUC:           RUC,
-			NombreEntidad: strings.TrimSpace(line[1]),
-			Departamento:  strings.TrimSpace(line[2]),
-			Provincia:     strings.TrimSpace(line[3]),
-			Distrito:      strings.TrimSpace(line[4]),
+			RUC:                 RUC,
+			NombreEntidad:       strings.TrimSpace(line[1]),
+			Departamento:        strings.TrimSpace(line[2]),
+			Provincia:           strings.TrimSpace(line[3]),
+			Distrito:            strings.TrimSpace(line[4]),
+			CodigoSIAF:          CodigoSIAF,
+			CodConSuCode:        CodConSuCode,
+			Estado:              strings.TrimSpace(line[7]),
+			UltimaActualizacion: strings.TrimSpace(line[8]),
 		})
 	}
 
